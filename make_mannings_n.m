@@ -28,10 +28,9 @@ tic
 if ~isempty(oldfort13name)
     disp('...from your old fort.13...'); 
     [fort13dat]=readfort13(oldfort13name); 
+    mannings_n = 0*p(:,1) + def_mannings_n;
     dmy=fort13dat.userval.Atr.Val;
     mannings_n(dmy(1,:))=dmy(2,:); 
-    dmy=fort13dat.defval.Atr.Val;
-    mannings_n(dmy(1,:))=dmy(2,:);
     clear dmy
 else
     disp('...assuming default value of ',num2str(def_mannings_n)); 
@@ -108,5 +107,13 @@ for cl=1 : length(classes) % loop over the classes
         %initialization).
     end
 end
-%writefort13(
+mask = mannings_n ~= 0.025; 
+idx  = find(mask); 
+
+fort13dat.userval.Atr(1).Val=[];
+
+fort13dat.userval.Atr(1).Val(1,:)=idx'; 
+fort13dat.userval.Atr(1).Val(2,:)=mannings_n(idx,:)'; 
+fort13dat.userval.Atr(1).usernumnodes=sum(mask); 
+writefort13(fort13dat,'fort2.13');
 toc
