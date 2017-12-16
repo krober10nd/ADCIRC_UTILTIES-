@@ -1,4 +1,6 @@
 clear all; close all; clc; 
+% After running prep_boundary.m, run this code to produce a text file 
+% called Exp.txt that will be in a format that is directly copied into the fort.15. 
 fid = fopen('Exp.txt','w');
 constout = {'Q1','O1','P1','K1','N2','M2','S2','K2'};
 const = {'q1','o1','p1','k1','n2','m2','s2','k2'};
