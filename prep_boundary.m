@@ -1,5 +1,7 @@
-%%
-%FUNCTION TO READ MESH
+%% Read in fort.14 with nodestrings to get ocean boundary. 
+% This will produce a textfile with the lat lon locations of the ocean boundary nodes. 
+% From there, you can run extract_tides.m to interpolate the TPXO global tidal const onto
+% your ocean bou. 
 
 f14name = 'fort_NCEI_RDEMS.grd'
 
